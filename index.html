@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafael Schnorr | Portfólio</title>
+  <style>
+
+    @font-face {
+      font-family: 'Aujournuit';
+      src: url('Aujournuit-Regular.otf') format('opentype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'NectoMono';
+      src: url('NectoMono-Regular.otf') format('opentype');
+      font-display: swap;
+    }
+
+    :root {
+      --bg-dark: transparent; 
+      --text-ink: #f5e3bb;
+      --sketch-line: #364831;
+      --text-muted: rgba(245, 227, 187, 0.9);
+      
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --accent-glow: rgba(255, 255, 255, 0.12);
+      
+      --sketch-outline: 
+        -1px -1px 0 var(--sketch-line),
+         1px -1px 0 var(--sketch-line),
+        -1px  1px 0 var(--sketch-line),
+         1px  1px 0 var(--sketch-line),
+         3px 0.5px 0 var(--sketch-line),
+        -0.5px 3px 0 var(--sketch-line);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-image: url('background.png'); 
+      background-size: cover;                 
+      background-position: center;            
+      background-repeat: no-repeat;          
+      background-attachment: fixed;           
+      
+      color: var(--text-ink);
+      font-family: 'NectoMono', monospace;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .clouds-background {
+      position: fixed;
+      inset: 0;
+      background-image: url('overlay.png');
+      background-size: 50vb;
+      opacity: 0.2;
+      mix-blend-mode: overlay;
+      z-index: -1;
+      animation: drift 21s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      from { background-position: 0 0; }
+      to   { background-position: -50vb 50vb; }
+    }
+
+    main {
+      padding: 18vh 5% 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 7rem;
+    }
+
+    .title-font {
+      font-family: 'Aujournuit', serif;
+      letter-spacing: 1px;
+      color: var(--text-ink);
+      text-shadow: var(--sketch-outline);
+    }
+
+    .glass-panel {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.4s ease, transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .glass-panel:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-panel {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 3rem;
+      padding: clamp(2rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-text { flex: 1.3; min-width: 300px; }
+
+    .hero-text h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      letter-spacing: -2px;
+      margin-bottom: 2rem;
+      line-height: 1;
+    }
+
+    .hero-text p {
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+      text-indent: 40px;
+      color: var(--text-muted);
+      text-align: justify;
+
+    }
+
+    .hero-photo {
+      flex: 0.7;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      max-width: 340px;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.08));
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .reports-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .card {
+      padding: 2.2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .card.wide {
+      grid-column: span 2;
+      flex-direction: row;
+      padding: 0;
+      overflow: hidden;
+      align-items: stretch;
+    }
+
+    .card-content {
+      padding: 2.2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .card-image {
+      flex: 1;
+      background: rgba(0,0,0,0.4);
+      border-left: 1px solid var(--glass-border);
+      overflow: hidden;
+    }
+
+    .card.wide.reverse .card-image {
+      border-left: none;
+      border-right: 1px solid var(--glass-border);
+      order: -1;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      filter: grayscale(1);
+      transition: all 0.6s ease;
+    }
+
+    .card:hover .card-image img {
+      opacity: 0.7;
+      filter: grayscale(0);
+      transform: scale(1.03);
+    }
+
+    .card .date {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      text-shadow: var(--sketch-outline);
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      padding: 4rem 2rem;
+      text-align: center;
+      font-size: 0.65rem;
+      color: var(--text-ink);
+      letter-spacing: 2px;
+      text-shadow: var(--sketch-outline);
+    }
+
+    @media (max-width: 1100px) {
+      .reports-grid { grid-template-columns: repeat(2, 1fr); }
+      .card.wide { grid-column: span 2; }
+    }
+
+    @media (max-width: 768px) {
+      .reports-grid { grid-template-columns: 1fr; }
+      .card.wide { grid-column: span 1; flex-direction: column; }
+      .card.wide.reverse .card-image { order: 0; border-right: none; border-top: 1px solid var(--glass-border); }
+      .card-image { border-left: none; border-top: 1px solid var(--glass-border); height: 200px; }
+      .hero-panel { padding: 2rem; text-align: center; }
+      .hero-text p { text-align: center; }
+      body { background-attachment: scroll; } 
+    }
+  </style>
+</head>
+<body>
+
+  <div class="clouds-background"></div>
+
+  <main>
+    <section id="prologo">
+      <div class="hero-panel glass-panel">
+        <div class="hero-text">
+          <h1 class="title-font">Prólogo</h1>
+          <p>Prazer! Meu nome é Rafael Schnorr, tenho 17 anos e terminei o ensino médio em 2025. Atualmente, estou fazendo Ciência da Computação na UniFil. Nasci e cresci na cidade de Londrina (PR), conhecida pelas universidades, pelos 1001 influencers que aqui nasceram e pelo suco da rodoviária.</p>
+          
+          <p>Desde pequeno, sempre gostei de matemática. Por muito tempo, procurei algo que relacionasse ela à arte. Já me cacei na arquitetura, no design gráfico e até na música. Mas nenhuma dessas artes traz o "fator útil" que a computação oferece.</p>
+          
+        </div>
+        <div class="hero-photo">
+          <img src="fotominha.png" alt="Rafael Schnorr">
+        </div>
+      </div>
+    </section>
+
+    <section id="tech">
+      <div class="section-header">
+        <h2 class="title-font" style="font-size: clamp(2rem, 5vw, 3rem);">Relatórios / / Londrinense Tech</h2>
+      </div>
+      
+      <div class="reports-grid">
+        
+        <article class="card glass-panel">
+          <span class="date">2/MAR/2026 — SEMANA 01</span>
+          <h3 class="title-font">Avaliação Diagnóstica</h3>
+          <p>Dia inicial. O intuito da prova era segregar a turma entre conhecimento básico e intermediário.</p>
+        </article>
+
+        <article class="card glass-panel wide">
+          <div class="card-content">
+            <span class="date">9/MAR/2026 — SEMANA 02</span>
+            <h3 class="title-font">Lógica 1</h3>
+            <p>O tutor Kawan aplicou exercícios competitivos em grupo sobre preposições conjuntivas e disjuntivas.</p>
+          </div>
+          <div class="card-image">
+            <img src="d2.png" alt="Semana 02">
+          </div>
+        </article>
+
+        <article class="card glass-panel wide reverse">
+          <div class="card-content">
+            <span class="date">16/MAR/2026 — SEMANA 03</span>
+            <h3 class="title-font">Lógica 2</h3>
+            <p>Avanço no assunto lógica, trazendo exercícios mais complexos no formato de competição em grupos.</p>
+          </div>
+          <div class="card-image">
+            <img src="d3.png" alt="Semana 03">
+          </div>
+        </article>
+
+        <article class="card glass-panel">
+          <span class="date">23/MAR/2026 — SEMANA 04</span>
+          <h3 class="title-font">Introdução à Web</h3>
+          <p>Início ao WebDev, entendendo a diferença entre Web e Internet com aula expositiva.</p>
+        </article>
+
+        <article class="card glass-panel wide">
+          <div class="card-content">
+            <span class="date">30/MAR/2026 — SEMANA 05</span>
+            <h3 class="title-font">Visual Studio</h3>
+            <p>Auxílio com a interface do VSCode, IDE que utilizaremos durante o resto do ano.</p>
+          </div>
+          <div class="card-image">
+            <img src="d5.png" alt="Semana 05">
+          </div>
+        </article>
+
+        <article class="card glass-panel">
+          <span class="date">06/ABR/2026 — SEMANA 06</span>
+          <h3 class="title-font">JavaScript</h3>
+          <p>Início da linguagem JavaScript aplicada na Web. Logs no console e alertas.</p>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    schnorr
+  </footer>
+
+</body>
+</html>
